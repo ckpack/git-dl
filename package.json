@@ -1,0 +1,27 @@
+{
+  "name": "github-download",
+  "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.6.2",
+  "description": "",
+  "author": "ckvv",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "bin": {
+    "github-download": "./bin/index.js"
+  },
+  "scripts": {
+    "dev": "node --experimental-strip-types src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.10.1",
+    "@types/node": "^22.13.10",
+    "eslint": "^9.22.0",
+    "typescript": "^5.8.2"
+  }
+}

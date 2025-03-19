@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "rootDir": "./src",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "strict": false,
+    "declaration": true,
+    "noEmit": true,
+    "outDir": "bin"
+  },
+  "include": ["src", "vite.config.js", "__test__"]
+}
