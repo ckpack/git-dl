@@ -7,14 +7,9 @@ import { pipeline } from 'node:stream/promises';
 import { request } from './request.js';
 
 function filterTree(tree: Tree[], options: Options) {
-  const { subpath, owner, repo, branch } = options;
-
+  const { subpath } = options;
   if (!subpath) {
-    return tree.map((v) => {
-      v._url = `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${branch}/${v.path}`;
-      v._path = v.path.replace(`${subpath}/`, '');
-      return v;
-    });
+    return tree;
   }
 
   const item = tree.find(v => v.path === subpath);
@@ -25,30 +20,26 @@ function filterTree(tree: Tree[], options: Options) {
   if (item.type === 'tree') {
     return tree.filter((v) => {
       return v.path.startsWith(subpath);
-    }).map((v) => {
-      v._url = `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${branch}/${v.path}`;
-      v._path = v.path.replace(`${subpath}/`, '');
-      return v;
     });
   }
   return [item];
 }
 
-export async function getGitTree(options: Options) {
-  const { owner, repo, branch } = options;
+export async function getGitTree(options: Options, base: string) {
+  const { owner, repo, branch, subpath } = options;
   const result: any = await (await request(`https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`)).json();
   if (result.status === '404') {
     throw new Error(`${owner}/${repo}(${branch}): ${result.message}`);
   }
 
-  return filterTree(result.tree, options);
-}
-
-export function formatGitTree(tree: Tree[], base: string) {
-  return tree.map((v) => {
+  const tree = result.tree.map((v: Tree) => {
+    v._url = `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${branch}/${v.path}`;
+    v._path = v.path.replace(`${subpath}/`, '');
     v._out = join(base, v._path);
     return v;
   });
+
+  return filterTree(tree, options);
 }
 
 function formatName(...args: string[]) {
@@ -56,9 +47,9 @@ function formatName(...args: string[]) {
 }
 
 export function getOutPutPath(options: Options) {
-  const { owner, repo, subpath, outputDir } = options;
+  const { repo, subpath, outputDir } = options;
 
-  return join(process.env.PWD, outputDir || formatName(owner, repo, subpath));
+  return join(process.env.PWD, outputDir || formatName(subpath || repo));
 }
 
 export async function writeFileFromItem(item: Tree) {

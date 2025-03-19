@@ -1,7 +1,7 @@
 import type { Options } from './type.js';
 import { access, constants, mkdir } from 'node:fs/promises';
 import process from 'node:process';
-import { formatGitTree, getGitTree, getOutPutPath, writeFileFromItem } from './github.js';
+import { getGitTree, getOutPutPath, writeFileFromItem } from './github.js';
 import { debug } from './logger.js';
 import { question } from './question.js';
 
@@ -35,7 +35,7 @@ export async function download(options: Options) {
     });
   }
 
-  const tree = formatGitTree(await getGitTree(options), base);
+  const tree = await getGitTree(options, base);
   for (const item of tree) {
     await writeFileFromItem(item);
     debug('write file:', item._out);
