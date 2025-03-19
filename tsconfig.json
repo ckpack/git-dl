@@ -7,11 +7,9 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "types": ["node"],
-    "allowImportingTsExtensions": true,
     "strict": false,
     "declaration": true,
-    "noEmit": true,
     "outDir": "bin"
   },
-  "include": ["src", "vite.config.js", "__test__"]
+  "include": ["src"]
 }
