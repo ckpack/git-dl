@@ -1,12 +1,21 @@
 import type { Options, Tree } from './type.js';
+import { createWriteStream } from 'node:fs';
+import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
+import process from 'node:process';
+import { pipeline } from 'node:stream/promises';
 import { request } from './request.js';
 
 function filterTree(tree: Tree[], options: Options) {
   const { subpath, owner, repo, branch } = options;
 
-  if (!subpath)
-    return tree;
+  if (!subpath) {
+    return tree.map((v) => {
+      v._url = `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${branch}/${v.path}`;
+      v._path = v.path.replace(`${subpath}/`, '');
+      return v;
+    });
+  }
 
   const item = tree.find(v => v.path === subpath);
 
@@ -40,4 +49,24 @@ export function formatGitTree(tree: Tree[], base: string) {
     v._out = join(base, v._path);
     return v;
   });
+}
+
+function formatName(...args: string[]) {
+  return args.filter(v => v).join('-').replaceAll('/', '-');
+}
+
+export function getOutPutPath(options: Options) {
+  const { owner, repo, subpath, outputDir } = options;
+
+  return join(process.env.PWD, outputDir || formatName(owner, repo, subpath));
+}
+
+export async function writeFileFromItem(item: Tree) {
+  if (item.type === 'tree') {
+    return mkdir(item._out, {
+      recursive: true,
+    });
+  }
+  const blob = (await request(item._url)).body;
+  return pipeline(blob, createWriteStream(item._out));
 }

@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import config from '../package.json' with { type: 'json' };
-import { download } from './utils.js';
+import { download } from './download.js';
 
 const program = new Command();
 

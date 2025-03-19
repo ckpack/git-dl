@@ -1,33 +1,9 @@
-import type { Options, Tree } from './type.js';
-import { createWriteStream } from 'node:fs';
+import type { Options } from './type.js';
 import { access, constants, mkdir } from 'node:fs/promises';
-import { join } from 'node:path';
 import process from 'node:process';
-import { pipeline } from 'node:stream/promises';
-import { formatGitTree, getGitTree } from './github.js';
+import { formatGitTree, getGitTree, getOutPutPath, writeFileFromItem } from './github.js';
 import { debug } from './logger.js';
 import { question } from './question.js';
-import { request } from './request.js';
-
-function formatName(...args: string[]) {
-  return args.filter(v => v).join('-').replaceAll('/', '-');
-}
-
-function getOutPutPath(options: Options) {
-  const { owner, repo, subpath, outputDir } = options;
-
-  return join(process.env.PWD, outputDir || formatName(owner, repo, subpath));
-}
-
-async function writeFileFromItem(item: Tree) {
-  if (item.type === 'tree') {
-    return mkdir(item._out, {
-      recursive: true,
-    });
-  }
-  const blob = (await request(item._url)).body;
-  return pipeline(blob, createWriteStream(item._out));
-}
 
 export async function download(options: Options) {
   debug(options);
@@ -62,5 +38,6 @@ export async function download(options: Options) {
   const tree = formatGitTree(await getGitTree(options), base);
   for (const item of tree) {
     await writeFileFromItem(item);
+    debug('write file:', item._out);
   }
 }
