@@ -2,6 +2,8 @@
 
 用于从 GitHub 仓库下载特定内容的命令行工具。它允许你指定仓库的所有者和名称、输出目录、分支、子路径、glob 表达式等参数，方便地下载你需要的文件
 
+> GitHub 对于未认证的用户会有速率限制 <https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api> 你可以在环境变量中添加 `GITHUB_TOKEN` 或者 `-t`避免超出限制, 你可以在 <https://github.com/settings/personal-access-tokens> 创建 `GITHUB_TOKEN`
+
 # 安装
 
 ```shell
@@ -21,10 +23,13 @@ git-dl [options] [command] <owner/repo> [output-dir]
 
 选项说明：
 
--   `-b, --branch <char>`：指定要下载的分支名称，默认值为 `main`。
--   `-s, --subpath <char>`：指定要下载的子路径。
--   `-g, --glob <char>`：指定 glob 表达式，用于筛选要下载的文件。
--   `-d, --debug`：启用调试模式，显示详细的调试日志。
++ -`V`, --version         output the version number
++ -`b`, --branch <char>   branch name (default: "main")
++ -`s`, --subpath <char>  subpath
++ -`g`, --glob <char>     glob expressions
++ -`d`, --debug           show debug log
++ -`t`, --token <char>    github token
++ -`h`, --help            display help for command
 
 示例：
 

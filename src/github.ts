@@ -1,9 +1,10 @@
 import type { Options, Tree } from './type.js';
-import { createWriteStream } from 'node:fs';
-import { access, constants, mkdir } from 'node:fs/promises';
+import { Buffer } from 'node:buffer';
+// import { createWriteStream } from 'node:fs';
+import { access, constants, mkdir, writeFile } from 'node:fs/promises';
 import { join, parse } from 'node:path';
 import process from 'node:process';
-import { pipeline } from 'node:stream/promises';
+// import { pipeline } from 'node:stream/promises';
 import { minimatch } from 'minimatch';
 import { request } from './request.js';
 
@@ -31,7 +32,7 @@ export async function getGitTree(options: Options, base: string) {
     if (result.status === '404') {
       throw new Error(`${owner}/${repo}(${branch}): ${result.message}`);
     }
-    throw new Error(result);
+    throw new Error(JSON.stringify(result, null, 2));
   }
 
   const tree = result.tree.map((v: Tree) => {
@@ -50,10 +51,12 @@ export function getOutPutPath(options: Options) {
 }
 
 export async function writeFileFromItem(item: Tree) {
-  const blob = (await request(item._url)).body;
-
+  const blob: any = await (await request(item.url)).json();
   await mkdirRecursive(parse(item._out).dir);
-  return pipeline(blob, createWriteStream(item._out));
+  return writeFile(item._out, Buffer.from(blob?.content, 'base64'));
+  // const blob = (await request(item._url)).body;
+  // await mkdirRecursive(parse(item._out).dir);
+  // return pipeline(blob, createWriteStream(item._out));
 }
 
 export async function mkdirRecursive(dir: string, options?: { existsHandler: any }) {

@@ -16,10 +16,12 @@ program
   .option('-s, --subpath <char>', 'subpath')
   .option('-g, --glob <char>', 'glob expressions')
   .option('-d, --debug', 'show debug log')
+  .option('-t, --token <char>', 'github token')
   .action(async (ownerRepoName: string, outputDir, options) => {
     const [owner, repo] = ownerRepoName.split('/');
 
     globalThis.debug = options.debug;
+    globalThis.token = options.token;
 
     await download({
       owner,
