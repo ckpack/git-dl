@@ -1,17 +1,20 @@
 {
   "name": "@ckpack/git-dl",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "packageManager": "pnpm@10.6.2",
   "description": "",
   "author": "ckvv",
   "license": "ISC",
   "keywords": [],
-  "main": "index.js",
+  "main": "./bin/index.js",
   "bin": {
     "git-dl": "./bin/index.js"
   },
+  "files": [
+    "bin"
+  ],
   "scripts": {
     "dev": "node --import=tsx src/index.ts",
     "build": "tsc",
