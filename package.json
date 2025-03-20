@@ -27,7 +27,8 @@
     "dev": "node --import=tsx src/index.ts",
     "build": "tsc",
     "lint": "eslint --fix",
-    "publish:npm": "npm run build && npm publish --registry https://registry.npmjs.org/ --access public"
+    "publish:npm": "npm run build && npm publish --registry https://registry.npmjs.org/ --access public",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
     "commander": "^13.1.0",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^4.10.1",
     "@types/node": "^22.13.10",
+    "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.22.0",
     "lint-staged": "^15.5.0",
     "simple-git-hooks": "^2.11.1",
