@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/ckvv/git-dl/compare/v1.1.0...v1.2.0) (2025-03-20)
+
+
+### Features
+
+* 更新版本 ([f4dbc2b](https://github.com/ckvv/git-dl/commit/f4dbc2b517c7532594fc5c7901d3e181cd2622bc))
+
 ## [1.1.0](https://github.com/ckvv/git-dl/compare/v1.0.0...v1.1.0) (2025-03-20)
 
 
