@@ -18,12 +18,12 @@ npm install -g @ckpack/git-dl
 git-dl [options] [command] <owner/repo> [output-dir]
 ```
 
-参数说明：
+Command:
 
 -   `<owner/repo>`：Required. The owner and name of the GitHub repository, in the format of `owner/repo`, for example, `ckvv/git-dl`.
 -   `[output-dir]`：Optional. The output directory for the downloaded files. If not specified, the default directory will be used.
 
-选项说明：
+Options:
 
 + `-V`, `--version`         output the version number
 + `-b`, `--branch <char>`   branch name (default: "main")
@@ -33,7 +33,7 @@ git-dl [options] [command] <owner/repo> [output-dir]
 + `-t`, `--token <char>`    github token
 + `-h`, `--help`            display help for command
 
-示例：
+Example:
 
 ```shell
 # download ckvv/git-dl
