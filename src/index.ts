@@ -14,13 +14,14 @@ program
   .argument('[output-dir]', 'output-dir')
   .option('-b, --branch <char>', 'branch name', 'main')
   .option('-s, --subpath <char>', 'subpath')
-  .option('-d, --debug', 'debug')
+  .option('-g, --glob <char>', 'glob expressions')
+  .option('-d, --debug', 'show debug log')
   .action(async (ownerRepoName: string, outputDir, options) => {
     const [owner, repo] = ownerRepoName.split('/');
 
     globalThis.debug = options.debug;
 
-    download({
+    await download({
       owner,
       repo,
       outputDir,

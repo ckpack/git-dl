@@ -4,6 +4,7 @@ export interface Options {
   outputDir: string;
   branch: string;
   subpath?: string;
+  glob?: string;
 }
 
 export interface Tree {
@@ -14,6 +15,5 @@ export interface Tree {
   size: string;
   url: string;
   _url: string;
-  _path: string;
   _out: string;
 }

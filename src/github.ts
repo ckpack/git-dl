@@ -1,63 +1,72 @@
 import type { Options, Tree } from './type.js';
 import { createWriteStream } from 'node:fs';
-import { mkdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { access, constants, mkdir } from 'node:fs/promises';
+import { join, parse } from 'node:path';
 import process from 'node:process';
 import { pipeline } from 'node:stream/promises';
+import { minimatch } from 'minimatch';
 import { request } from './request.js';
 
 function filterTree(tree: Tree[], options: Options) {
-  const { subpath } = options;
-  if (!subpath) {
-    return tree;
+  const { subpath, glob } = options;
+  if (!subpath && !glob) {
+    return tree.filter(v => v.type === 'blob');
   }
 
-  const item = tree.find(v => v.path === subpath);
+  const result = tree.filter((v) => {
+    return v.type === 'blob' && (glob ? minimatch(v.path, glob, { matchBase: true, partial: true }) : true && subpath ? v.path.startsWith(subpath) : true);
+  });
 
-  if (!item) {
-    throw new Error(`subpath: ${subpath}: Not Exist \n${tree.filter(v => !v.path.includes('/')).map(v => v.path).join(`\n`)}`);
+  if (!result.length) {
+    throw new Error(`subpath: ${subpath} : Not Exist In https://github.com/${options.owner}/${options.repo}/tree/${options.branch} \n${tree.filter(v => !v.path.includes('/')).map(v => v.path).join(`\n`)}`);
   }
-  if (item.type === 'tree') {
-    return tree.filter((v) => {
-      return v.path.startsWith(subpath);
-    });
-  }
-  return [item];
+  return result;
 }
 
 export async function getGitTree(options: Options, base: string) {
-  const { owner, repo, branch, subpath } = options;
+  const { owner, repo, branch } = options;
   const result: any = await (await request(`https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`)).json();
-  if (result.status === '404') {
-    throw new Error(`${owner}/${repo}(${branch}): ${result.message}`);
+
+  if (!result.tree) {
+    if (result.status === '404') {
+      throw new Error(`${owner}/${repo}(${branch}): ${result.message}`);
+    }
+    throw new Error(result);
   }
 
   const tree = result.tree.map((v: Tree) => {
     v._url = `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${branch}/${v.path}`;
-    v._path = v.path.replace(`${subpath}/`, '');
-    v._out = join(base, v._path);
+    v._out = join(base, v.path);
     return v;
   });
 
   return filterTree(tree, options);
 }
 
-function formatName(...args: string[]) {
-  return args.filter(v => v).join('-').replaceAll('/', '-');
-}
-
 export function getOutPutPath(options: Options) {
-  const { repo, subpath, outputDir } = options;
+  const { repo, outputDir } = options;
 
-  return join(process.env.PWD, outputDir || formatName(subpath || repo));
+  return join(process.env.PWD, outputDir || repo);
 }
 
 export async function writeFileFromItem(item: Tree) {
-  if (item.type === 'tree') {
-    return mkdir(item._out, {
+  const blob = (await request(item._url)).body;
+
+  await mkdirRecursive(parse(item._out).dir);
+  return pipeline(blob, createWriteStream(item._out));
+}
+
+export async function mkdirRecursive(dir: string, options?: { existsHandler: any }) {
+  try {
+    await access(dir, constants.F_OK);
+    await options?.existsHandler(dir);
+  }
+  catch (error) {
+    if (error.code !== 'ENOENT') {
+      throw error;
+    }
+    await mkdir(dir, {
       recursive: true,
     });
   }
-  const blob = (await request(item._url)).body;
-  return pipeline(blob, createWriteStream(item._out));
 }
