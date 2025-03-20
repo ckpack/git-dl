@@ -1,7 +1,7 @@
 {
   "name": "@ckpack/git-dl",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "packageManager": "pnpm@10.6.2",
   "description": "",
@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "commander": "^13.1.0",
-    "minimatch": "10.0.1"
+    "minimatch": "10.0.1",
+    "progress": "^2.0.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.10.1",

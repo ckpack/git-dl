@@ -1,5 +1,6 @@
 import type { Options } from './type.js';
 import process from 'node:process';
+import ProgressBar from 'progress';
 import { getGitTree, getOutPutPath, mkdirRecursive, writeFileFromItem } from './github.js';
 import { debug } from './logger.js';
 import { question } from './question.js';
@@ -28,8 +29,13 @@ export async function download(options: Options) {
 
   const tree = await getGitTree(options, base);
 
+  const bar = new ProgressBar(':bar', { total: tree.length });
   for (const item of tree) {
+    bar.tick();
     await writeFileFromItem(item);
     debug('write file:', item._out);
   }
+
+  // eslint-disable-next-line no-console
+  console.log(`Donwload At: ${base}`);
 }

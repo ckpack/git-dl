@@ -1,4 +1,6 @@
 export function debug(...args: any[]) {
-  // eslint-disable-next-line no-console
-  console.log(...args);
+  if (globalThis.debug) {
+    // eslint-disable-next-line no-console
+    console.log(...args);
+  }
 }
