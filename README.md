@@ -1,1 +1,1 @@
-github-download
+@ckpack/git-dl

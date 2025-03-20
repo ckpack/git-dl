@@ -1,7 +1,8 @@
 {
-  "name": "github-download",
+  "name": "@ckpack/git-dl",
   "type": "module",
   "version": "0.0.1",
+  "private": false,
   "packageManager": "pnpm@10.6.2",
   "description": "",
   "author": "ckvv",
@@ -9,7 +10,7 @@
   "keywords": [],
   "main": "index.js",
   "bin": {
-    "github-download": "./bin/index.js"
+    "git-dl": "./bin/index.js"
   },
   "scripts": {
     "dev": "node --import=tsx src/index.ts",
