@@ -1,8 +1,10 @@
 # @ckpack/git-dl
 
-用于从 GitHub 仓库下载特定内容的命令行工具。它允许你指定仓库的所有者和名称、输出目录、分支、子路径、glob 表达式等参数，方便地下载你需要的文件
+[English](./README.md) | [简体中文](./README_ZH.md)
 
-> GitHub 对于未认证的用户会有速率限制 <https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api> 你可以在环境变量中添加 `GITHUB_TOKEN` 或者 `-t`避免超出限制, 你可以在 <https://github.com/settings/personal-access-tokens> 创建 `GITHUB_TOKEN`
+A command-line tool used to download specific content from GitHub repositories. It allows you to specify parameters such as the owner and name of the repository, the output directory, the branch, the subpath, the glob expression, etc., making it convenient to download the files you need.
+
+> GitHub has rate limits for unauthenticated users <https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api>. You can add `GITHUB_TOKEN` to the environment variables or use the `-t` option to avoid exceeding the limits. You can create `GITHUB_TOKEN` at <https://github.com/settings/personal-access-tokens>
 
 # 安装
 
@@ -18,31 +20,37 @@ git-dl [options] [command] <owner/repo> [output-dir]
 
 参数说明：
 
--   `<owner/repo>`：必填，GitHub 仓库的所有者和名称，格式为 `owner/repo`，例如 `ckvv/github-download`。
--   `[output-dir]`：可选，下载文件的输出目录，若不指定则会使用默认目录。
+-   `<owner/repo>`：Required. The owner and name of the GitHub repository, in the format of `owner/repo`, for example, `ckvv/git-dl`.
+-   `[output-dir]`：Optional. The output directory for the downloaded files. If not specified, the default directory will be used.
 
 选项说明：
 
-+ -`V`, --version         output the version number
-+ -`b`, --branch <char>   branch name (default: "main")
-+ -`s`, --subpath <char>  subpath
-+ -`g`, --glob <char>     glob expressions
-+ -`d`, --debug           show debug log
-+ -`t`, --token <char>    github token
-+ -`h`, --help            display help for command
++ `-V`, `--version`         output the version number
++ `-b`, `--branch <char>`   branch name (default: "main")
++ `-s`, `--subpath <char>`  subpath
++ `-g`, `--glob <char>`     glob expressions
++ `-d`, `--debug `          show debug log
++ `-t`, `--token <char>`    github token
++ `-h`, `--help`            display help for command
 
 示例：
 
 ```shell
-# 下载 ckvv/git-dl
+# download ckvv/git-dl
 git-dl ckvv/git-dl
 
-# 仅下载 ckvv/git-dl 中的 src 目录
+# download ckvv/git-dl to my_dir
+git-dl ckvv/git-dl ./my_dir
+
+# Only download the src directory in ckvv/git-dl
 git-dl ckvv/template -s src
 
-# 仅下载 ckvv/git-dl 中的 ts 文件
+# Only download the .ts files in ckvv/git-dl
 git-dl ckvv/template -g "**.ts"
 
-# 显示命令的帮助
+# USE GITHUB_TOKEN
+git-dl ckvv/template -g "**.ts" -t "YOUR_GITHUB_TOKEN"
+
+# Show the help for the command
 git-dl -h
 ```
