@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/ckvv/git-dl/compare/v1.0.0...v1.1.0) (2025-03-20)
+
+
+### Features
+
+* 添加 token 参数 ([015141b](https://github.com/ckvv/git-dl/commit/015141b40c91ee8121c42436ec7a9b080e37c6a3))
+
 ## 1.0.0 (2025-03-20)
 
 
