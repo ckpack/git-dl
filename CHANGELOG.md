@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/ckvv/git-dl/compare/v1.2.0...v1.2.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* 优化action流程 ([6179940](https://github.com/ckvv/git-dl/commit/6179940c5dbfd7ca8a08d39b8dd90a2e86bf6113))
+
 ## [1.2.0](https://github.com/ckvv/git-dl/compare/v1.1.0...v1.2.0) (2025-03-20)
 
 
