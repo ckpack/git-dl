@@ -6,13 +6,13 @@ A command-line tool used to download specific content from GitHub repositories. 
 
 > GitHub has rate limits for unauthenticated users <https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api>. You can add `GITHUB_TOKEN` to the environment variables or use the `-t` option to avoid exceeding the limits. You can create `GITHUB_TOKEN` at <https://github.com/settings/personal-access-tokens>
 
-# 安装
+# Install
 
 ```shell
 npm install -g @ckpack/git-dl
 ```
 
-# 使用方法
+# Usage
 
 ```shell
 git-dl [options] [command] <owner/repo> [output-dir]
