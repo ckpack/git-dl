@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/ckvv/git-dl/compare/v1.2.1...v1.2.2) (2025-03-21)
+
+
+### Bug Fixes
+
+* actions/checkout 未生效 ([d350e6f](https://github.com/ckvv/git-dl/commit/d350e6ff41b08f9e3a27791a235e0712f668675d))
+
 ## [1.2.1](https://github.com/ckvv/git-dl/compare/v1.2.0...v1.2.1) (2025-03-21)
 
 
