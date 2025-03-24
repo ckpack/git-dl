@@ -43,13 +43,13 @@ git-dl ckvv/git-dl
 git-dl ckvv/git-dl ./my_dir
 
 # Only download the src directory in ckvv/git-dl
-git-dl ckvv/template -s src
+git-dl ckvv/git-dl -s src
 
 # Only download the .ts files in ckvv/git-dl
-git-dl ckvv/template -g "**.ts"
+git-dl ckvv/git-dl -g "**.ts"
 
 # USE GITHUB_TOKEN
-git-dl ckvv/template -g "**.ts" -t "YOUR_GITHUB_TOKEN"
+git-dl ckvv/git-dl -g "**.ts" -t "YOUR_GITHUB_TOKEN"
 
 # Show the help for the command
 git-dl -h

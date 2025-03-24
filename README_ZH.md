@@ -43,13 +43,13 @@ git-dl ckvv/git-dl
 git-dl ckvv/git-dl ./my_dir
 
 # 仅下载 ckvv/git-dl 中的 src 目录
-git-dl ckvv/template -s src
+git-dl ckvv/git-dl -s src
 
 # 仅下载 ckvv/git-dl 中的 ts 文件
-git-dl ckvv/template -g "**.ts"
+git-dl ckvv/git-dl -g "**.ts"
 
 # 使用 GITHUB_TOKEN
-git-dl ckvv/template -g "**.ts" -t "YOUR_GITHUB_TOKEN"
+git-dl ckvv/git-dl -g "**.ts" -t "YOUR_GITHUB_TOKEN"
 
 # 显示命令的帮助
 git-dl -h
