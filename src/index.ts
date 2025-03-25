@@ -10,7 +10,7 @@ program
   .version(config.version);
 
 program
-  .argument('<owner/repo>', 'owner/repo, such a ckvv/github-download')
+  .argument('<owner/repo>', 'owner/repo, such a ckpack/git-dl')
   .argument('[output-dir]', 'output-dir')
   .option('-b, --branch <char>', 'branch name', 'main')
   .option('-s, --subpath <char>', 'subpath')

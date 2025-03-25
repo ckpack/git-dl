@@ -20,7 +20,7 @@ git-dl [options] [command] <owner/repo> [output-dir]
 
 参数说明：
 
--   `<owner/repo>`：必填，GitHub 仓库的所有者和名称，格式为 `owner/repo`，例如 `ckvv/github-download`。
+-   `<owner/repo>`：必填，GitHub 仓库的所有者和名称，格式为 `owner/repo`，例如 `ckpack/git-dl`。
 -   `[output-dir]`：可选，下载文件的输出目录，若不指定则会使用默认目录。
 
 选项说明：
@@ -36,20 +36,20 @@ git-dl [options] [command] <owner/repo> [output-dir]
 示例：
 
 ```shell
-# 下载 ckvv/git-dl
-git-dl ckvv/git-dl
+# 下载 ckpack/git-dl
+git-dl ckpack/git-dl
 
-# 下载 ckvv/git-dl 到 my_dir
-git-dl ckvv/git-dl ./my_dir
+# 下载 ckpack/git-dl 到 my_dir
+git-dl ckpack/git-dl ./my_dir
 
-# 仅下载 ckvv/git-dl 中的 src 目录
-git-dl ckvv/git-dl -s src
+# 仅下载 ckpack/git-dl 中的 src 目录
+git-dl ckpack/git-dl -s src
 
-# 仅下载 ckvv/git-dl 中的 ts 文件
-git-dl ckvv/git-dl -g "**.ts"
+# 仅下载 ckpack/git-dl 中的 ts 文件
+git-dl ckpack/git-dl -g "**.ts"
 
 # 使用 GITHUB_TOKEN
-git-dl ckvv/git-dl -g "**.ts" -t "YOUR_GITHUB_TOKEN"
+git-dl ckpack/git-dl -g "**.ts" -t "YOUR_GITHUB_TOKEN"
 
 # 显示命令的帮助
 git-dl -h

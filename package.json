@@ -7,7 +7,7 @@
   "description": "Command line tool for downloading specific content from a GitHub repository.",
   "author": "ckvv",
   "license": "ISC",
-  "repository": "https://github.com/ckvv/git-dl",
+  "repository": "https://github.com/ckpack/git-dl",
   "keywords": [
     "git",
     "github",

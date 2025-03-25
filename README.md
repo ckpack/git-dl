@@ -20,7 +20,7 @@ git-dl [options] [command] <owner/repo> [output-dir]
 
 Command:
 
--   `<owner/repo>`：Required. The owner and name of the GitHub repository, in the format of `owner/repo`, for example, `ckvv/git-dl`.
+-   `<owner/repo>`：Required. The owner and name of the GitHub repository, in the format of `owner/repo`, for example, `ckpack/git-dl`.
 -   `[output-dir]`：Optional. The output directory for the downloaded files. If not specified, the default directory will be used.
 
 Options:
@@ -36,20 +36,20 @@ Options:
 Example:
 
 ```shell
-# download ckvv/git-dl
-git-dl ckvv/git-dl
+# download ckpack/git-dl
+git-dl ckpack/git-dl
 
-# download ckvv/git-dl to my_dir
-git-dl ckvv/git-dl ./my_dir
+# download ckpack/git-dl to my_dir
+git-dl ckpack/git-dl ./my_dir
 
-# Only download the src directory in ckvv/git-dl
-git-dl ckvv/git-dl -s src
+# Only download the src directory in ckpack/git-dl
+git-dl ckpack/git-dl -s src
 
-# Only download the .ts files in ckvv/git-dl
-git-dl ckvv/git-dl -g "**.ts"
+# Only download the .ts files in ckpack/git-dl
+git-dl ckpack/git-dl -g "**.ts"
 
 # USE GITHUB_TOKEN
-git-dl ckvv/git-dl -g "**.ts" -t "YOUR_GITHUB_TOKEN"
+git-dl ckpack/git-dl -g "**.ts" -t "YOUR_GITHUB_TOKEN"
 
 # Show the help for the command
 git-dl -h
