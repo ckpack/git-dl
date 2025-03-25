@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/ckpack/git-dl/compare/v1.2.2...v1.3.0) (2025-03-25)
+
+
+### Features
+
+* 迁移仓库地址 ([d9cff36](https://github.com/ckpack/git-dl/commit/d9cff36303fe945a5b205af436795ade46e37142))
+
 ## [1.2.2](https://github.com/ckpack/git-dl/compare/v1.2.1...v1.2.2) (2025-03-21)
 
 
